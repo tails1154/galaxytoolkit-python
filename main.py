@@ -20,7 +20,7 @@ def stage_command(args: list) -> bool:
         return False
 
     # Ask for the address of MessageData::sInstance
-    message_data_address = input("Enter the address of MessageData::sInstance (e.g., 0x80002FF4): ")
+    message_data_address = "0x80800ae8"
     try:
         message_data_address = int(message_data_address, 16)  # Convert the address to int
     except ValueError:
@@ -66,7 +66,7 @@ def crash_command(args: list) -> bool:
     #     return False
 
     # Ask for the address of MessageData::sInstance
-    message_data_address = input("Enter the address of MessageData::sInstance. It should of been OSReported when the game launched.")
+    message_data_address = "0x80800ae8"
     try:
         message_data_address = int(message_data_address, 16)  # Convert the address to int
     except ValueError:
@@ -94,7 +94,8 @@ def crash_command(args: list) -> bool:
     mw = MemWatch("crash_command", tool_message_address, False)
     mw.write_memory_from_string(str("4294967295"))  # Expects a decimal string
 
-    print(f"Sent stage '{stage_name}' with scenario {scenario_no} and star {star_no} (packed: 0x{packed_value:08X})")
+    print("Crash sent!")
+    #print(f"Sent stage '{stage_name}' with scenario {scenario_no} and star {star_no} (packed: 0x{packed_value:08X})")
     return True
 def main():
     while True:
@@ -104,6 +105,8 @@ def main():
             scenariono = input("ScenarioNo> ")
             starno = input("StarNo> ")
             stage_command(["stage", stagename, scenariono, starno])
+        elif cmd.lower() == "crash":
+            crash_command(["crash"])
         elif cmd.lower() in ["exit", "quit"]:
             break
 
